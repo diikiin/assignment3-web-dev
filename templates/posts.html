@@ -7,8 +7,7 @@
 <h1>Blog Posts</h1>
 <ul>
     {% for post in posts %}
-        <li>{{ post.title }} - {{ post.created_at }}</li>
-        <li>{{ post.likes }} - {{ post.dislikes }}</li>
+        <li><a href="{% url 'get_post_details' post.id %}">{{ post.title }}</a></li>
     {% endfor %}
 </ul>
 </body>
