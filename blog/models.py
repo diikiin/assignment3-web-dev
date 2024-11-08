@@ -24,6 +24,7 @@ class Post(models.Model):
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
     categories = models.ManyToManyField(Category, related_name='posts')
+    image = models.ImageField(upload_to='blog/%Y/%m/%d', blank=True, null=True)
 
     objects = PostManager()
 

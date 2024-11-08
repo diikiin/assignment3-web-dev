@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Blog</title>
-</head>
-<body>
-<h1>Blog Posts</h1>
-<ul>
-    {% for post in posts %}
-        <li><a href="{% url 'get_post_details' post.id %}">{{ post.title }}</a></li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
 
-<a href="{% url 'create_post' %}">Create New Post</a>
-</body>
-</html>
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2><a href="{% url 'get_post_details' post.id %}">{{ post.title }}</a></h2>
+                <p>By {{ post.author }} | Published on {{ post.published_at|date:"F d, Y" }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3><a href="{% url 'create_post' %}">Create New Post</a></h3>
+{% endblock %}
