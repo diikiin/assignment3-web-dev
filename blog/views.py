@@ -18,7 +18,7 @@ def get_post_details(request, post_id):
 
 def create_post(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect(get_posts)
