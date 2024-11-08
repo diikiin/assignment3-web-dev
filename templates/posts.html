@@ -10,5 +10,7 @@
         <li><a href="{% url 'get_post_details' post.id %}">{{ post.title }}</a></li>
     {% endfor %}
 </ul>
+
+<a href="{% url 'create_post' %}">Create New Post</a>
 </body>
 </html>
