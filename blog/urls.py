@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
 
 from . import views
@@ -10,4 +8,3 @@ urlpatterns = [
     path('author/<str:author>/', views.PostsByAuthorView.as_view(), name='posts_by_author'),
     path('create/', views.create_post, name='create_post'),
 ]
-
