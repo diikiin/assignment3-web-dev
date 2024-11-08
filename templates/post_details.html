@@ -6,13 +6,13 @@
 </head>
 <body>
 <h1>{{ post.title }}</h1>
-<h3>Author: {{ post.author }}</h3>
+<h3>Author: <a href="{% url 'posts_by_author' post.author %}"> {{ post.author }} </a> </h3>
 <h4>Categories:
     {% for category in post.categories.all %}
         {{ category.name }}
     {% endfor %}
 </h4>
-<h4>Published on: {{ post.published_at }}</h4>
+<h4>Published on: {{ post.published_at|date:"F d, Y" }}</h4>
 <h4>Likes: {{ post.likes }}, Dislikes: {{ post.dislikes }}</h4>
 <p>{{ post.content }}</p>
 <h4>Comments:</h4>

@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
 
 from .models import Post, Comment
 
@@ -12,3 +13,25 @@ def get_post_details(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
     return render(request, "post_details.html", {"post": post, "comments": comments})
+
+
+class PostListView(ListView):
+    model = Post
+    template_name = "posts.html"
+    context_object_name = "posts"
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = "post_details.html"
+    context_object_name = "post"
+
+
+class PostsByAuthorView(ListView):
+    model = Post
+    template_name = "posts_by_author.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        author = self.kwargs.get("author")
+        return Post.objects.by_author(author)
