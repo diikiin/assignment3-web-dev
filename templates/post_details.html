@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>{{ post.title }}</h1>
-<h3>Author: <a href="{% url 'posts_by_author' post.author %}"> {{ post.author }} </a> </h3>
+<h3>Author: <a href="{% url 'posts_by_author' post.author %}"> {{ post.author }} </a></h3>
 <h4>Categories:
     {% for category in post.categories.all %}
         {{ category.name }}
@@ -16,15 +16,16 @@
 <h4>Likes: {{ post.likes }}, Dislikes: {{ post.dislikes }}</h4>
 <p>{{ post.content }}</p>
 <h4>Comments:</h4>
-{% for comment in comments %}
-    <p>
-        Author: {{ comment.author }},
-        Created at: {{ comment.created_at }}
-    </p>
-    <p>
-        {{ comment.content }}
-    </p>
-{% endfor %}
+{% if comments %}
+    {% for comment in comments %}
+        <p>
+            <strong>{{ comment.author }}</strong> - {{ comment.created_at|date:"F d, Y H:i" }}
+        </p>
+        <p>{{ comment.content }}</p>
+    {% endfor %}
+{% else %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endif %}
 
 <p></p>
 </body>

@@ -26,6 +26,11 @@ class PostDetailView(DetailView):
     template_name = "post_details.html"
     context_object_name = "post"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comments"] = Comment.objects.filter(post=self.object).order_by("-created_at")
+        return context
+
 
 class PostsByAuthorView(ListView):
     model = Post
